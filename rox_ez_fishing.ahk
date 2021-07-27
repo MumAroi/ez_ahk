@@ -175,5 +175,7 @@ GuiControl, +c%HookColorCode%, ColorSetHookPosition
 GuiControl,, TextColorSetHookPosition, MousePosition: x%xpos% y%ypos% / colorCode:  c%HookColorCode%
 return
 
+Esc:: ExitApp
+
 GuiClose:
 ExitApp

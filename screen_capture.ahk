@@ -164,6 +164,7 @@ SaveBitmapToFile(oBitmap) {
    FileSelectFile, filePath, 16,, Save the image as:, Images (*.png; *.bmp; *.tiff; *.tif; *.jpeg; *.jpg; *.gif)
    if !filePath
       Return
+   ; filePath = %A_ScriptDir%/RoxSettings.png
    oGdip := new GDIp
    pBitmap := oGdip.CreateBitmapFromHBITMAP(oBitmap[1])
    oGdip.SaveBitmap(pBitmap, filePath)
