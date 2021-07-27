@@ -40,6 +40,8 @@ Gui, Add, Text, x202 y129 w260 h20 vTextColorSetHookPosition,
 Gui, Add, Button, x142 y169 w120 h50 gButtonSetUpTest, SetUpTest`n(Ctrl+Q)
 Gui, Add, Button, x22 y309 w120 h50 gButtonStartFishing, Start/Stop Fishing`n(Ctrl+F)
 Gui, Add, Text, x22 y279 w60 h20 , Number Bait
+Gui, Add, Progress, x220 y279 w20 h20 +cFF0000 vFishingStatusColor, 100
+Gui, Add, Text, x250 y279 w60 h20 vFishingStatus, InActive
 Gui, Add, Edit, x92 y279 w70 h20 Number -VScroll vBaitNumber, 0
 ; Gui, Add, Button, x180 y279 w120 h50 gButtonSaveConfig, SaveConfig
 ; Gui, Add, Button, x335 y279 w120 h50 gButtonLoadConfig, LoadConfig
@@ -103,27 +105,33 @@ return
 
 ButtonStartFishing:
 ^f::
-Toggle := !Toggle
 GuiControlGet, BaitNumber 
-FishingCount = 0
-While (Toggle)
-{
-    Sleep, 100
-    SetControlDelay -1
-    WinActivate, ahk_id %WindowActiveId%
-    PixelGetColor, RColor, %xpos% , %ypos%
-    If (RColor = RedyPosionColor){
-        ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
-        Loop {
-            PixelGetColor, HColor, %xpos% , %ypos%
-            If (HColor = HookPosionColor){
-                ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%
-                FishingCount++
-                If(FishingCount = BaitNumber) {
-                    Toggle := !Toggle 
+if(BaitNumber > 0){
+    Toggle := !Toggle
+    FishingCount = 0
+    GuiControl,, FishingStatus, Avtive
+    GuiControl, +c00FF00, FishingStatusColor
+    While (Toggle)
+    {
+        Sleep, 100
+        SetControlDelay -1
+        WinActivate, ahk_id %WindowActiveId%
+        PixelGetColor, RColor, %xpos% , %ypos%
+        If (RColor = RedyPosionColor){
+            ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
+            Loop {
+                PixelGetColor, HColor, %xpos% , %ypos%
+                If (HColor = HookPosionColor){
+                    ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%
+                    FishingCount++
+                    If(FishingCount = BaitNumber) {
+                        Toggle := !Toggle 
+                        GuiControl,, FishingStatus, InAvtive
+                        GuiControl, +cFF0000, FishingStatusColor
+                    }
+                    Sleep, 500
+                    Break
                 }
-                Sleep, 500
-                Break
             }
         }
     }
