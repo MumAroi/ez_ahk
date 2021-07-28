@@ -27,7 +27,7 @@ Gui, Add, Text, x27 y29 w280 h15 vTextMousePositon, MousePosition x0, Y0
 Gui, Add, Button, x22 y45 w120 h50 gButtonSetPositionClick, SetPositionClick`n(Ctrl+R)
 Gui, Add, Text, x172 y50 w280 h20 vTextImagePath1, 
 Gui, Add, Button, x172 y70 w80 h20 gButtonUploadImage1, Image1
-Gui, Add, Button, x22 y110 w120 h50 gButtonTest, SetUpTest`n(Ctrl+E)
+Gui, Add, Button, x22 y110 w120 h50 gButtonTest, Test`n(Ctrl+E)
 Gui, Add, Text, x172 y110 w280 h20 vTextImagePath2, 
 Gui, Add, Button, x172 y130 w80 h20 gButtonUploadImage2, Image2
 Gui, Add, Button, x32 y249 w120 h50 gButtonStartFishing, Start/Stop Fishing`n(Ctrl+D)
