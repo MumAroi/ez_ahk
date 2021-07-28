@@ -57,7 +57,7 @@ return
 ButtonSetPositionClick:
 ^r::
 WinGet, WindowActiveId, ID, A
-WinMaximize ahk_id %WindowActiveId%
+; WinMaximize ahk_id %WindowActiveId%
 WinGetActiveStats, WindowActiveName, W, H, X, Y
 WinGetClass, WindowClass, A
 MouseGetPos, xpos, ypos
