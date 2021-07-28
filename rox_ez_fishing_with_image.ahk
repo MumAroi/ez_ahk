@@ -13,6 +13,7 @@ IfNotExist, %A_ScriptDir%/RoxSettings.ini
     iniwrite,0,RoxSettings.ini,Main,YPosition
     iniwrite,'',RoxSettings.ini,Main,ImagePath1
     iniwrite,'',RoxSettings.ini,Main,ImagePath2
+    iniwrite,0,RoxSettings.ini,Main,BaitNumber
 }
 ; -----------------------CONFIGURE--------------------------------------------------------------------
 ; IniRead,xpos,RoxSettings.ini,Main,XPosition
@@ -122,12 +123,14 @@ if(BaitNumber > 0){
 return
 
 ButtonSaveConfig:
+GuiControlGet, BaitNumber 
 iniwrite,%WindowActiveName%,RoxSettings.ini,Main,WindowActiveName
 iniwrite,%WindowClass%,RoxSettings.ini,Main,WindowClass
 iniwrite,%xpos%,RoxSettings.ini,Main,XPosition
 iniwrite,%ypos%,RoxSettings.ini,Main,YPosition
 iniwrite,%ImagePath1%,RoxSettings.ini,Main,ImagePath1
 iniwrite,%ImagePath2%,RoxSettings.ini,Main,ImagePath2
+iniwrite,%BaitNumber%,RoxSettings.ini,Main,BaitNumber
 return
 
 ButtonLoadConfig:
@@ -143,6 +146,7 @@ IniRead,xpos,RoxSettings.ini,Main,XPosition
 IniRead,ypos,RoxSettings.ini,Main,YPosition
 IniRead,ImagePath1,RoxSettings.ini,Main,ImagePath1
 IniRead,ImagePath2,RoxSettings.ini,Main,ImagePath2
+IniRead,BNumber,RoxSettings.ini,Main,BaitNumber
 
 WinActivate, %WindowActiveName% ahk_class %WindowClass%
 WinGet, WindowActiveId, ID, A
@@ -153,6 +157,7 @@ SplitPath, ImagePath2, ImageName2
 GuiControl,, TextImagePath1, %ImageName1%
 GuiControl,, TextImagePath2, %ImageName2%
 GuiControl,, TextMousePositon, MousePosition X%xpos%, Y%ypos%
+GuiControl,, BaitNumber, %BNumber%
 return
 
 Esc:: ExitApp
