@@ -38,7 +38,7 @@ Gui, Add, Edit, x122 y219 w70 h20 Number -VScroll vBaitNumber, 0
 Gui, Add, Button, x190 y249 w120 h50 gButtonSaveConfig, SaveConfig
 Gui, Add, Button, x345 y249 w120 h50 gButtonLoadConfig, LoadConfig
 ; Generated using SmartGUI Creator 4.0
-Gui, Show, x476 y151 h340 w494, New GUI Window
+Gui, Show, x476 y151 h340 w494, AreYouWanNo Fishing
 Return
 
 ButtonUploadImage1:
