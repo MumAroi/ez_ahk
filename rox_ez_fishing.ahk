@@ -89,15 +89,19 @@ ButtonSetUpTest:
 Sleep, 100
 SetControlDelay -1
 WinActivate, ahk_id %WindowActiveId%
+startTime := A_TickCount 
 PixelGetColor, RColor, %xpos% , %ypos%
 if (RColor = RedyPosionColor) {
     ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
     Loop {
+        nowTime := A_TickCount-start
         PixelGetColor, HColor, %xpos% , %ypos%
         if (HColor = HookPosionColor) {
             ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
             Sleep, 500
             Break
+        }else if (nowTime > 2000) {
+            break
         }
     }
 }
