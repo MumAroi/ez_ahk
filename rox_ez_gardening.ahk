@@ -19,7 +19,7 @@ Gui, Show, x536 y205 h162 w485, AreYouWanNo Gardening
 Return
 
 ButtonSetPosition:
-^R::
+^r::
 WinGet, WindowActiveId, ID, A
 ; WinMaximize ahk_id %WindowActiveId%
 WinGetActiveStats, WindowActiveName, W, H, X, Y
@@ -39,21 +39,18 @@ ButtonStart:
 Toggle := !Toggle
 GuiControl,, TextStatusStart, Avtive
 GuiControl, +c00FF00, ColorStart
-; While (Toggle)
-; {
-    Loop {
-        If (Toggle){
-            break
-        }
-        SetControlDelay -1
-        WinActivate, ahk_id %WindowActiveId%
-        PixelGetColor, RColor, %xpos% , %ypos%
-        If (RColor = RedyPosionColor){
-            ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
-            Sleep, 1
-        }
+Loop {
+    If (Toggle){
+        break
     }
-; }
+    SetControlDelay -1
+    WinActivate, ahk_id %WindowActiveId%
+    PixelGetColor, RColor, %xpos% , %ypos%
+    If (RColor = RedyPosionColor){
+        ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
+        Sleep, 1
+    }
+}
 GuiControl,, TextStatusStart, Not Active
 GuiControl, +cFF0000, ColorStart
 return
