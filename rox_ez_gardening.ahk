@@ -36,23 +36,24 @@ return
 
 ButtonStart:
 ^e::
-; SetKeyDelay, 0, 50
 Toggle := !Toggle
 GuiControl,, TextStatusStart, Avtive
 GuiControl, +c00FF00, ColorStart
-Loop {
-    if(Toggle){
-        break
+; While (Toggle)
+; {
+    Loop {
+        If (Toggle){
+            break
+        }
+        SetControlDelay -1
+        WinActivate, ahk_id %WindowActiveId%
+        PixelGetColor, RColor, %xpos% , %ypos%
+        If (RColor = RedyPosionColor){
+            ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
+            Sleep, 1
+        }
     }
-    Sleep, 0
-    SetControlDelay -1
-    WinActivate, ahk_id %WindowActiveId%
-    PixelGetColor, RColor, %xpos% , %ypos%
-    If (RColor = RedyPosionColor){
-        ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
-    }
-}
-
+; }
 GuiControl,, TextStatusStart, Not Active
 GuiControl, +cFF0000, ColorStart
 return
