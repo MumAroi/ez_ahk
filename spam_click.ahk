@@ -1,6 +1,6 @@
 #SingleInstance, force
-; #MaxThreadsPerHotkey 2
-; CoordMode, Mouse, Screen, Pixel
+#MaxThreadsPerHotkey 2
+CoordMode, Mouse, Screen, Pixel
 
 flag := false
 F2:: flag := !flag
@@ -17,8 +17,22 @@ F2:: flag := !flag
 ~$LButton::
     While (flag and GetKeyState("LButton", "P")){
         Click
-        Sleep 50  ;  milliseconds
+        Sleep 15  ;  milliseconds
     }
+return
+
+^e::
+Toggle := !Toggle
+WinGet, WindowActiveId, ID, A
+WinActivate, ahk_id %WindowActiveId%
+MouseGetPos, xpos, ypos
+Loop {
+    If (!Toggle){
+        break
+    }
+    Click, %xpos%, %ypos%
+    Sleep 15
+}
 return
 
 Esc:: ExitApp
