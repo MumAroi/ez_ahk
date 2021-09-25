@@ -23,8 +23,8 @@ return
 
 ^e::
 Toggle := !Toggle
-WinGet, WindowActiveId, ID, A
-WinActivate, ahk_id %WindowActiveId%
+; WinGet, WindowActiveId, ID, A
+; WinActivate, ahk_id %WindowActiveId%
 MouseGetPos, xpos, ypos
 Loop {
     If (!Toggle){
