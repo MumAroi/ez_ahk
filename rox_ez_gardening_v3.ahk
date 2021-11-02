@@ -22,6 +22,8 @@ WinGet, WindowActiveId, ID, A
 WinGetActiveStats, WindowActiveName, W, H, X, Y
 WinGetClass, WindowClass, A
 MouseGetPos, xpos, ypos
+PixelGetColor, RedyPosionColor, %xpos% , %ypos%
+RedyPosionColorString := RedyPosionColor
 GuiControl,, TextStatusSetUpPosition, MousePosition: x%xpos% y%ypos%
 return
 
@@ -31,32 +33,32 @@ Toggle := !Toggle
 GuiControl,, TextStatusStart, Avtive
 GuiControl, +c00FF00, ColorStart
 WinActivate, ahk_id %WindowActiveId%
+countClick := 0
 Loop {
     If (!Toggle){
         break
     }
-    Random, rxpos, xpos , xpos+15
-    Random, rypos, ypos , ypos+15
-    Random, rclick, 1 , 3
-    Random, rtclick, 100, 250
-    Sleep rtclick
-    if(rclick == 3){
-        Click, %rxpos%, %rypos%
-        Sleep 100
-        Click, %rxpos%, %rypos%
-        Sleep 100
-        Click, %rxpos%, %rypos%
-    }else if(rclick == 2){
-        Click, %rxpos%, %rypos%
-        Sleep 100
-        Click, %rxpos%, %rypos%
-    }else{
-        Click, %rxpos%, %rypos%
+    PixelGetColor, RColor, %xpos% , %ypos%
+    If (RColor = RedyPosionColor){
+        Random, rxpos, xpos , xpos+15
+        Random, rypos, ypos , ypos+15
+        Random, rclick, 1 , 3
+        Random, rtclick, 100, 300
+        Sleep rtclick
+        if(rclick == 3){
+            Click, %rxpos%, %rypos%
+            Sleep 100
+            Click, %rxpos%, %rypos%
+            Sleep 100
+            Click, %rxpos%, %rypos%
+        }else if(rclick == 2){
+            Click, %rxpos%, %rypos%
+            Sleep 100
+            Click, %rxpos%, %rypos%
+        }else{
+            Click, %rxpos%, %rypos%
+        }
     }
-    ; SetControlDelay -1
-    ; ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
-    ; Click, %xpos%, %ypos%
-    ; Sleep 15
 }
 GuiControl,, TextStatusStart, Not Active
 GuiControl, +cFF0000, ColorStart
