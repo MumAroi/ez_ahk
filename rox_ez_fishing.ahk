@@ -25,7 +25,7 @@ CoordMode, Mouse, Screen, Pixel
 ; IniRead,HookColorCode,RoxSettings.ini,Main,HookColorCode
 
 ; GUI 
-Gui, +AlwaysOnTop
+; Gui, +AlwaysOnTop
 Gui, Color, FFFFFF
 Gui, Add, GroupBox, x2 y9 w480 h220 , SetUp
 Gui, Add, GroupBox, x2 y249 w480 h130 , Automation
@@ -92,12 +92,14 @@ WinActivate, ahk_id %WindowActiveId%
 startTime := A_TickCount 
 PixelGetColor, RColor, %xpos% , %ypos%
 if (RColor = RedyPosionColor) {
-    ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
+    Random, rxpos, xpos , xpos+2
+    Random, rypos, ypos , ypos+2
+    ControlClick, x%rxpos% y%rypos%, ahk_id %WindowActiveId%,,,, NA
     Loop {
         nowTime := A_TickCount-start
         PixelGetColor, HColor, %xpos% , %ypos%
         if (HColor = HookPosionColor) {
-            ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
+            ControlClick, x%rxpos% y%rypos%, ahk_id %WindowActiveId%,,,, NA
             Sleep, 500
             Break
         }else if (nowTime > 2000) {
@@ -122,11 +124,13 @@ if(BaitNumber > 0){
         WinActivate, ahk_id %WindowActiveId%
         PixelGetColor, RColor, %xpos% , %ypos%
         If (RColor = RedyPosionColor){
-            ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%,,,, NA
+            Random, rxpos, xpos , xpos+2
+            Random, rypos, ypos , ypos+2
+            ControlClick, x%rxpos% y%rypos%, ahk_id %WindowActiveId%,,,, NA
             Loop {
                 PixelGetColor, HColor, %xpos% , %ypos%
                 If (HColor = HookPosionColor){
-                    ControlClick, x%xpos% y%ypos%, ahk_id %WindowActiveId%
+                    ControlClick, x%rxpos% y%rypos%, ahk_id %WindowActiveId%
                     FishingCount++
                     If(FishingCount = BaitNumber) {
                         Toggle := !Toggle 
