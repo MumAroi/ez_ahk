@@ -8,4 +8,6 @@ Space::LButton
     Suspend, toggle
 return
 
-; Esc:: ExitApp
+^!x::
+    ExitApp
+return
